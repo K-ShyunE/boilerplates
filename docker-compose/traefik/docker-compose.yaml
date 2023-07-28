@@ -1,0 +1,26 @@
+version: '3.8'
+  
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    environment:
+      - "TZ=Asia/Seoul"
+#    command:
+#      - --api.insecure=true # HTTPS가 아닌 HTTP로 API 사용
+#      - --providers.docker=true # Docker 프로바이더 사용
+#      - --providers.docker.exposedbydefault=false # 역프록시로 사용할 컨테이너들은 노출되도록 설정
+#      - --entrypoints.web.address=:80 # 웹 애플리케이션을 위한 진입점 설정
+    ports:
+      - "80:80" # HTTP 포트
+      - "8080:8080" # Traefik 웹 대시보드 포트
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Docker 소켓 마운트
+      - ./config/traefik.yaml:/etc/traefik/traefik.yml
+    restart: unless-stopped
+    networks:
+      - traefik_network
+
+networks:
+  traefik_network:
+    external: true
