@@ -80,6 +80,12 @@ entryPoints:
 #     default:
 #       minVersion: VersionTLS12
 
+tls:
+  certificates:
+    - certFile: /certs/edaily.co.kr/STAR.edaily.co.kr.crt
+      keyFile: /certs/edaily.co.kr/STAR.edaily.co.kr.key
+
+
 providers:
   docker:
     exposedByDefault: false  # Default is true

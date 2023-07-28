@@ -16,6 +16,8 @@ service:
       - "traefik.enable=true"
       - "traefik.http.routers.<service_name>.rule=Host(`<any-domain>`)"
       - "traefik.docker.network=traefik_network" # docker 네트워크를 지정해줘야 traefik 에서 제대로 라우팅을 할수있다.
+      - "traefik.http.routers.<service_name>.entrypoints=web,websecure"
+      - "traefik.http.routers.<service_name>.tls=true"  # SSL/TLS 사용
     networks:
       - traefik_network
 
